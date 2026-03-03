@@ -1,0 +1,52 @@
+DNADesign\Elemental\Forms\ElementalAreaConfig:
+  extensions:
+    gridConfig: Netwerkstatt\Site\Extension\ElementalAreaConfig
+
+DNADesign\Elemental\Models\BaseElement:
+  extensions:
+    anchor: Netwerkstatt\Site\Extension\ElementAnchor
+    showhide: Netwerkstatt\Site\Extension\ShowElement
+#   size: Fractas\ElementalStylings\StylingSize
+  size:
+    default: default
+  defaults:
+    Size: default
+
+DNADesign\Elemental\Models\ElementContent:
+  styles:
+    default: 'Normal'
+    left: 'Text linksbündig'
+    heading: 'Big Heading'
+
+Netwerkstatt\Site\Element\Image:
+  size:
+    default: 'Normal (Content)' #Content Breite
+    full: 'Full (Screen)' #ganze Bildschirmbreite
+
+Netwerkstatt\Site\Element\Video:
+  size:
+    default: 'Normal (Content)' #Content Breite
+    full: 'Full (Screen)' #ganze Bildschirmbreite
+  defaults:
+    Size: full
+
+Dynamic\Elements\Promos\Elements\ElementPromos:
+  extensions:
+    promosize: Netwerkstatt\Site\Extension\PromoSize
+  styles:
+    horizontal: Horizontal (nebeneinander)
+    vertical: Vertical (untereinander, alternierend)
+  defaults:
+    styles: vertical
+
+EdgarIndustries\ElementalMap\Block\MapBlock:
+  size:
+    default: 'Normal (Content)' #Content Breite
+    full: 'Full (Screen)' #ganze Bildschirmbreite
+  styles:
+    default: 'Nur Karte'
+    justmarkers: 'Nur Locations'
+    justmarkerscentered: 'Nur Locations, Text vertikal zentriert'
+    full: 'Karte und Marker'
+  defaults:
+    Height: 400

@@ -1,0 +1,10 @@
+de:
+  Dynamic\BaseObject\Model\BaseElementObject:
+    TitleLabel: Titel
+    ImageLabel: Bild
+    ImageDescription: 'optional: Bild anzeigen'
+    ContentLabel: Inhalt
+    LinkLabel: Link
+    LinkDescription: 'optional: Call-To-Action Link'
+  Dynamic\Elements\Promos\Elements\ElementPromos:
+    BlockType: Text/Bild mit Button

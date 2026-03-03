@@ -1,0 +1,43 @@
+# See https://docs.silverstripe.org/en/4/developer_guides/email/ for additional information about setting up email
+---
+Name: project-emailconfig
+After:
+  - '#emailconfig'
+---
+
+SilverStripe\Control\Email\Email:
+  admin_email: office@netwerkstatt.at
+  cc_all_emails_to: werner.krauss@netwerkstatt.at
+
+
+SilverStripe\Core\Injector\Injector:
+  Swift_Transport:
+    class: Swift_SmtpTransport
+    properties:
+      Host:
+      Port:
+#      Encryption: tls
+#      Host: mail.your-server.de
+#      Port: 587
+#      Encryption: tls
+#    calls:
+#      Username: [ setUsername, ['`APP_SMTP_USERNAME`'] ]
+#      Password: [ setPassword, ['`APP_SMTP_PASSWORD`'] ]
+#      AuthMode: [ setAuthMode, ['login'] ]
+
+
+---
+Name: mydevemailconfig
+After:
+  - '#emailconfig'
+Only:
+  environment: dev
+  envorconstant:
+    APP_SMTP_USE_MAILHOG: true
+---
+SilverStripe\Core\Injector\Injector:
+  Swift_Transport:
+    class: Swift_SendmailTransport
+    constructor:
+      0: '/usr/local/bin/mhsendmail --smtp-addr="mailhog:1025" -t'
+    calls: []

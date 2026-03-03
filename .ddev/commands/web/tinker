@@ -1,0 +1,12 @@
+#!/bin/bash
+
+## Description: Run SS-Shell, a PHP shell tailored for Silverstripe CMS
+## Usage: tinker
+## Example: "ddev tinker"
+
+if ! [ -x "$(command -v vendor/bin/ssshell)" ]; then
+  echo 'Error: pstaender/ssshell is not installed.' >&2
+  echo 'Please add it as a composer requirement.' >&2
+  exit 1
+fi
+php vendor/bin/ssshell

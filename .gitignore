@@ -1,0 +1,16 @@
+/silverstripe-cache/
+/.env
+/vendor/
+/_resources/
+/public/_resources/
+/.graphql-generated/
+/public/_graphql/
+/public/assets/
+/themes/*/node_modules
+**/node_modules
+
+.idea
+/error.log
+/temp/
+/themes/*/dist/
+/*.sql

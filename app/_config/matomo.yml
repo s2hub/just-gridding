@@ -1,0 +1,3 @@
+Netwerkstatt\Piwik\Extensions\PiwikExtension:
+  piwik_server: '//logs.netwerkstatt.at/'
+  piwik_site_id:

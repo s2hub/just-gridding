@@ -1,0 +1,6 @@
+#---
+#Only:
+#  envvarset: 'SS_BASE_URL'
+#---
+#Silverstripe\Control\Director:
+#  alternate_base_url: '`SS_BASE_URL`'

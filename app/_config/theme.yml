@@ -1,0 +1,13 @@
+---
+Name: mytheme
+---
+SilverStripe\View\SSViewer:
+  themes:
+    - '$public'
+    - 'mytheme'
+    - '$default'
+
+Atwx\ViteHelper\Helper\ViteHelper:
+  manifest_path: "/themes/mytheme/dist/.vite/manifest.json"
+  output_url: "/themes/mytheme/dist/"
+  editor_css: 'src/css/editor.css'

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+## Description: Build Silverstripe's database; runs db:build --flush
+## Usage: build
+## Example: "ddev build"
+
+if ! [ -x "$(command -v sake)" ]; then
+  echo 'Error: sake not found' >&2
+  exit 1
+fi
+
+sake db:build --flush

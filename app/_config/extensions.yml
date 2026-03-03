@@ -1,0 +1,21 @@
+
+EdgarIndustries\ElementalMap\Model\MapMarker:
+  extensions:
+    content: Netwerkstatt\Site\Extension\MapMarker
+    gallery: PurpleSpider\BasicGalleryExtension\PhotoGalleryExtension
+    cmspermissions: Netwerkstatt\Site\Extension\CMSPermissions
+  gallery-cms-tab: Bilder
+
+EdgarIndustries\ElementalMap\Block\MapBlock:
+  extensions:
+    - Netwerkstatt\Site\Extension\MapBlock
+  owns:
+    - Markers
+
+SilverStripe\Forms\Form:
+  extensions:
+    tailwindstyling: Netwerkstatt\Site\Extension\FormStyling
+
+SilverStripe\Forms\FormField:
+  extensions:
+    - Netwerkstatt\Site\Extension\FormFieldHolderStyling

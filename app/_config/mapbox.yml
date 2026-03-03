@@ -1,0 +1,11 @@
+---
+Name: mapbox-config
+After: 'silverstripe-mapboxfield'
+---
+SilverStripe\SiteConfig\SiteConfig:
+  defaults:
+    - ElementalMapMapboxId: mapbox.satellite
+    - ElementalMapMapboxToken:
+
+Bigfork\SilverStripeMapboxField\MapboxField:
+  access_token: ''

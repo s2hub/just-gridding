@@ -1,0 +1,19 @@
+{
+  "src/css/app.css": {
+    "file": "assets/main-DrVqObuv.css",
+    "src": "src/css/app.css",
+    "isEntry": true
+  },
+  "src/css/editor.css": {
+    "file": "assets/editor.scss-l0sNRNKZ.js",
+    "name": "editor.scss",
+    "src": "src/css/editor.css",
+    "isEntry": true
+  },
+  "src/javascript/index.js": {
+    "file": "assets/main.js-Da7ia3BV.js",
+    "name": "main.js",
+    "src": "src/javascript/index.js",
+    "isEntry": true
+  }
+}

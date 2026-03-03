@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Access to an undefined property Netwerkstatt\\Site\\Extension\\MapBlock\:\:\$Style\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/src/Extension/MapBlock.php
+
+		-
+			message: '#^Call to static method create\(\) on an unknown class Bigfork\\SilverStripeMapboxField\\MapboxField\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/src/Extension/MapBlock.php
+
+		-
+			message: '#^Class EdgarIndustries\\ElementalMap\\Provider\\Mapbox not found\.$#'
+			identifier: class.notFound
+			count: 2
+			path: app/src/Extension/MapBlock.php
+
+		-
+			message: '#^Call to an undefined method Netwerkstatt\\Site\\Extension\\MapMarker\:\:exists\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/src/Extension/MapMarker.php
+
+		-
+			message: '#^Call to static method create\(\) on an unknown class Bigfork\\SilverStripeMapboxField\\MapboxField\.$#'
+			identifier: class.notFound
+			count: 1
+			path: app/src/Extension/MapMarker.php

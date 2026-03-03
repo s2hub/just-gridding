@@ -1,0 +1,36 @@
+Page:
+  home:
+    Title: Home
+    SortOrder: 1
+    ShowInMenus: false
+  galerie:
+    Title: Galerie
+    SortOrder: 5
+    ClassName: Netwerkstatt\Site\Page\BlockPage
+  hallstatt:
+    Title: Hallstatt
+    SortOrder: 6
+    ClassName: Netwerkstatt\Site\Page\BlockPage
+  service:
+    Title: Service
+    SortOrder: 7
+    ClassName: Netwerkstatt\Site\Page\BlockPage
+  impressum:
+    Title: Impressum
+    ShowInMenus: false
+    SortOrder: 9
+  datenschutz:
+    Title: Datenschutz
+    ShowInMenus: false
+    SortOrder: 10
+
+SiteTree_Localised:
+  home_en:
+    RecordID: =>Page.home
+    Locale: en_GB
+    Title: 'Home'
+  galerie_en:
+    RecordID: =>Page.galerie
+    Locale: en_GB
+    Title: 'Gallery'
+    MenuTitle: Gallery

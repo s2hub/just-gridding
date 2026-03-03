@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "prettier-plugin-silverstripe",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindConfig": "./tailwind.config.js",
+  "overrides": [
+    {
+      "files": "*.ss",
+      "options": {
+        "parser": "silverstripe",
+        "printWidth": 120,
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    }
+  ]
+}

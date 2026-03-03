@@ -1,0 +1,38 @@
+gorriecoe\Menu\Models\MenuSet:
+  footer:
+    Title: FooterMenu
+    Slug: footer
+    AllowChildren: 1
+
+gorriecoe\Menu\Models\MenuLink:
+  galerie:
+    Title: Galerie
+    Type: SiteTree
+    MenuSet: =>gorriecoe\Menu\Models\MenuSet.footer
+    Parent: 0
+    Sort: 2
+    SiteTree: =>Page.galerie
+  service:
+    Title: Service
+    Type: SiteTree
+    MenuSet: =>gorriecoe\Menu\Models\MenuSet.footer
+    Parent: 0
+    Sort: 4
+    SiteTree: =>Page.service
+  impressum:
+    Title: Impressum
+    Type: SiteTree
+    MenuSet:
+    Parent: =>gorriecoe\Menu\Models\MenuLink.service
+    Sort: 0
+    SiteTree: =>Page.impressum
+  datenschutz:
+    Title: Datenschutz
+    Type: SiteTree
+    MenuSet:
+    Parent: =>gorriecoe\Menu\Models\MenuLink.service
+    Sort: 0
+    SiteTree: =>Page.datenschutz
+
+
+

@@ -1,0 +1,136 @@
+#!/bin/bash
+
+## Description: runs CI tooling locally
+## Usage: ci [phpunit-args]
+
+set -uo pipefail
+
+# ANSI Color Codes
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLACK_ON_GREEN='\033[0;30;42m'
+BLACK_ON_RED='\033[0;30;41m'
+NC='\033[0m' # No Color
+
+# Helper for banners
+print_banner() {
+    local message="$1"
+    local color="$2"
+    local width=100
+
+    echo -e "\n${color}$(printf '%*s' $width '')${NC}"
+    echo -e "${color} $(printf '%-*s' $((width - 1)) "$message")${NC}"
+    echo -e "${color}$(printf '%*s' $width '')${NC}\n"
+}
+
+# Variable für den Gesamtstatus
+EXIT_CODE=0
+
+# Status-Speicher
+STATUS_PHPUNIT="SKIP"
+STATUS_PHPCS="SKIP"
+STATUS_PRETTIER="SKIP"
+STATUS_RECTOR="SKIP"
+STATUS_PHPSTAN="SKIP"
+STATUS_JACK="SKIP"
+
+# 1) PHPUnit
+echo "*** PHPUnit ***"
+if SS_DATABASE_USERNAME="root" SS_DATABASE_PASSWORD="root" phpunit; then
+  echo -e "${GREEN}[OK] PHPUnit tests passed${NC}"
+  STATUS_PHPUNIT="OK"
+else
+  echo -e "${RED}[ERROR] PHPUnit tests failed${NC}"
+  STATUS_PHPUNIT="FAILED"
+  EXIT_CODE=1
+fi
+
+# 2) Linting (PHP)
+echo "*** PHP Linting ***"
+if phpcs; then
+  echo -e "${GREEN}[OK] PHP Linting passed${NC}"
+  STATUS_PHPCS="OK"
+else
+  echo -e "${RED}[ERROR] PHP Linting found errors${NC}"
+  echo "Please run 'ddev fix' to fix errors automatically and 'ddev lint' to see what's still missing"
+  STATUS_PHPCS="FAILED"
+  EXIT_CODE=1
+fi
+
+# 3) Prettier Check
+echo "*** Prettier Check ***"
+if /mnt/ddev_config/commands/web/prettier check; then
+  echo -e "${GREEN}[OK] Prettier check passed${NC}"
+  STATUS_PRETTIER="OK"
+else
+  echo -e "${RED}[ERROR] Prettier found formatting issues${NC}"
+  echo "Please run 'ddev prettier write' or 'ddev fix' to fix them."
+  STATUS_PRETTIER="FAILED"
+  EXIT_CODE=1
+fi
+
+# 4) Rector (dry-run)
+echo "*** Rector ***"
+if rector --dry-run --no-ansi; then
+  echo -e "${GREEN}[OK] Rector check passed${NC}"
+  STATUS_RECTOR="OK"
+else
+  echo -e "${RED}[ERROR] Rector found things to improve${NC}"
+  echo "Please run 'ddev rector' and commit the fixes"
+  STATUS_RECTOR="FAILED"
+  EXIT_CODE=1
+fi
+
+# 5) PHPStan Level 4
+echo "*** PHPStan Level 4 ***"
+if phpstan -l4 --no-ansi; then
+  echo -e "${GREEN}[OK] PHPStan level 4 passed${NC}"
+  STATUS_PHPSTAN="OK"
+else
+  echo -e "${RED}[ERROR] PHPStan found errors${NC}"
+  STATUS_PHPSTAN="FAILED"
+  EXIT_CODE=1
+fi
+
+#6) Rector/Jack
+echo "*** Checking for outdated packages"
+if jack breakpoint;
+then
+  echo -e "${GREEN}[OK] Jack's package check passed${NC}"
+  STATUS_JACK="OK"
+else
+  echo -e "${RED}[ERROR] Jack found too many outdated packages. Please update${NC}"
+  STATUS_JACK="FAILED"
+  EXIT_CODE=1
+fi
+# --- SUMMARY ---
+echo -e "\n================ SUMMARY ================"
+
+print_status() {
+    local name="$1"
+    local status="$2"
+    if [ "$status" == "OK" ]; then
+        echo -e "${name}: $(printf '%*s' $((20 - ${#name})) '') ${GREEN}✅ OK${NC}"
+    elif [ "$status" == "FAILED" ]; then
+        echo -e "${name}: $(printf '%*s' $((20 - ${#name})) '') ${RED}❌ FAILED${NC}"
+    else
+        echo -e "${name}: $(printf '%*s' $((20 - ${#name})) '') ⚪ SKIP"
+    fi
+}
+
+print_status "PHPUnit" "$STATUS_PHPUNIT"
+print_status "PHP Linting" "$STATUS_PHPCS"
+print_status "Prettier" "$STATUS_PRETTIER"
+print_status "Rector" "$STATUS_RECTOR"
+print_status "PHPStan" "$STATUS_PHPSTAN"
+print_status "Jack" "$STATUS_JACK"
+
+echo "========================================="
+
+if [ $EXIT_CODE -eq 0 ]; then
+    print_banner "[OK] ALL CHECKS PASSED" "$BLACK_ON_GREEN"
+else
+    print_banner "[ERROR] SOME CHECKS FAILED" "$BLACK_ON_RED"
+fi
+
+exit $EXIT_CODE

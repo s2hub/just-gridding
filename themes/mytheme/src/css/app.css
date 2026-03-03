@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "swiper/css/autoplay";
+@import "glightbox/dist/css/glightbox.css";
+
+@theme {
+  --color-primary-500: oklch(63.7% 0.237 25.331); /* red-500 */
+
+  --color-secondary-500: oklch(62.3% 0.214 259.815); /* blue-500 */
+
+  --color-bgheader: oklch(92.8% 0.006 264.531); /* gray-200 */
+  --color-bgfooter: oklch(37.3% 0.034 259.733) /* gray-700 */
+    --aspect-cinema: 21/10;
+  --aspect-extra-wide: 27/10;
+}
+
+@layer utilities {
+  .prose {
+    --tw-prose-body: inherit;
+    --tw-prose-bullets: inherit;
+    --tw-prose-bold: inherit;
+  }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: transform 0.3s ease-in-out;
+}
+
+header.hide {
+  transform: translateY(-300px);
+}
+
+body {
+  /*background: green !important;*/
+}

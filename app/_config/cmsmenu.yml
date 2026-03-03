@@ -1,0 +1,33 @@
+SilverStripe\Admin\LeftAndMain:
+  menu_groups:
+    Content:
+      icon: 'sitemap'
+      children:
+        - SilverStripe-CMS-Controllers-CMSPagesController
+        - SilverStripe-AssetAdmin-Controller-AssetAdmin
+        - Dynamic-Elements-Promos-Admin-PromosAdmin
+        - gorriecoe-Menu-Admin-MenuSetAdmin
+        - SilverStripe-CampaignAdmin-CampaignAdmin
+        - SilverStripe-VersionedAdmin-ArchiveAdmin
+    SilverStripe\Admin\SecurityAdmin:
+      children:
+        - SilverStripe-Admin-SecurityAdmin
+    Other:
+      icon: info-circled
+      children:
+        - TractorCow-Fluent-Control-LocaleAdmin
+        - SilverStripe-SiteConfig-SiteConfigLeftAndMain
+        - SilverStripe-Reports-ReportAdmin
+
+SilverStripe\CMS\Controllers\CMSPagesController:
+  menu_priority: 400
+
+SilverStripe\AssetAdmin\Controller\AssetAdmin:
+  menu_priority: 300
+
+Dynamic\Elements\Promos\Admin\PromosAdmin:
+  menu_priority: 200
+  menu_icon_class: font-icon-picture
+
+gorriecoe\Menu\Admin\MenuSetAdmin:
+  menu_priority: 100

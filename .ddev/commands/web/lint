@@ -1,0 +1,16 @@
+#!/bin/bash
+
+## Description: run PHPCodeSniffer
+## Usage: lint
+## Example: "ddev lint"
+
+if ! [ -x "$(command -v vendor/bin/phpcs)" ]; then
+  echo 'Error: squizlabs/php_codesniffer is not installed.' >&2
+  echo 'Please add it as a composer requirement.' >&2
+  exit 1
+fi
+
+php vendor/bin/phpcs "$@"
+
+echo "*** Checking Prettier formatting ***"
+/mnt/ddev_config/commands/web/prettier check

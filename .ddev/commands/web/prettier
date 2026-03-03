@@ -1,0 +1,42 @@
+#!/bin/bash
+
+## Description: Run Prettier to format frontend assets
+## Usage: prettier [check|write]
+## Example: ddev prettier write
+
+COMMAND=${1:-check}
+
+# Dynamically find the theme name from Silverstripe configuration
+# It filters out special themes starting with $ (like $public, $default)
+THEME_NAME=$(php -r "
+    include_once 'vendor/autoload.php';
+    // We need a minimal SS environment or just parse the config file if possible.
+    // However, sake config:dump is safer as it considers all overrides.
+    \$config = shell_exec('sake config:dump');
+    if (preg_match('/ssviewer:\s+themes:\s+(.*?)(?:\s+\w+:|$)/s', \$config, \$matches)) {
+        if (preg_match_all('/-\s+([^$\s][\w-]+)/', \$matches[1], \$themeMatches)) {
+            echo \$themeMatches[1][0] ?? '';
+        }
+    }
+")
+
+if [ -z "$THEME_NAME" ]; then
+    echo "Error: Could not determine theme name from Silverstripe configuration."
+    exit 1
+fi
+
+THEME_PATH="themes/$THEME_NAME"
+
+if [ ! -d "$THEME_PATH" ]; then
+    echo "Error: Theme directory $THEME_PATH does not exist."
+    exit 1
+fi
+
+echo "--- Using theme: $THEME_NAME ---"
+# We use yarn --cwd to use the prettier version installed in the theme
+
+if [[ "$COMMAND" == "write" || "$COMMAND" == "--write" ]]; then
+  yarn --cwd "$THEME_PATH" prettier --write "src/**/*.{js,css,scss}" "templates/**/*.ss"
+else
+  yarn --cwd "$THEME_PATH" prettier --check "src/**/*.{js,css,scss}" "templates/**/*.ss"
+fi

@@ -1,0 +1,18 @@
+DNADesign\Populate\Populate:
+  include_yaml_fixtures:
+    - 'app/fixtures/fluent.yml'
+    - 'app/fixtures/pages.yml'
+    - 'app/fixtures/menu.yml'
+
+  truncate_objects:
+    - TractorCow\Fluent\Model\Locale
+    - Page
+    - gorriecoe\Menu\Models\MenuSet
+    - gorriecoe\Link\Models\Link
+    - gorriecoe\Menu\Models\MenuLink
+
+  truncate_tables:
+    - SiteTree_Localised
+    - SiteTree_Localised_Live
+    - SiteTree_Localised_Versions
+    - Link_Localised

@@ -1,0 +1,84 @@
+{
+  "name": "silverstripe/installer",
+  "type": "silverstripe-recipe",
+  "description": "The SilverStripe Framework Installer",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/wernerkrauss/silverstripe-elemental-stylings.git"
+    }
+  ],
+  "require": {
+    "php": "^8.4",
+    "silverstripe/framework": "^6",
+    "silverstripe/recipe-cms": "^6",
+    "silverstripe/sharedraftcontent": "^4",
+    "tractorcow/silverstripe-fluent": "^8",
+    "dnadesign/silverstripe-elemental": "^6",
+    "dynamic/silverstripe-elemental-baseobject": "^6",
+    "dynamic/silverstripe-elemental-promos": "^6",
+    "jonom/silverstripe-betternavigator": "^7",
+    "silverstripe/login-forms": "^6",
+    "symbiote/silverstripe-gridfieldextensions": "^5",
+    "jonom/focuspoint": "^6",
+    "fractas/elemental-stylings": "dev-silverstripe6 as 2.0",
+    "silverstripe/lumberjack": "^4",
+    "silverstripe/htmleditor-tinymce": "^1",
+    "purplespider/silverstripe-elemental-basic-gallery": "4.0",
+    "atwx/silverstripe-vitehelper": "^1",
+    "wilr/silverstripe-googlesitemaps": "^4",
+    "pixelpoems/silverstripe-vanilla-cookieconsent": "^2",
+    "wernerkrauss/silverstripe-menumanager": "dev-main"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^12.0|^13",
+    "squizlabs/php_codesniffer": "^4",
+    "wernerkrauss/silverstripe-rector": "^1",
+    "phpstan/extension-installer": "^1.0",
+    "cambis/silverstan": "^2",
+    "deployer/deployer": "^8.0",
+    "dnadesign/silverstripe-populate": "^4",
+    "silverstripe/standards": "^1.2.3",
+    "rector/jack": "^0.5",
+    "sebastian/diff": "dev-main as 6.1"
+  },
+  "extra": {
+    "resources-dir": "_resources",
+    "expose": [
+      "themes/mytheme/images",
+      "themes/mytheme/fonts",
+      "themes/mytheme/dist"
+    ],
+    "project-files-installed": [
+      "app/.htaccess",
+      "app/_config.php",
+      "app/_config/mimevalidator.yml",
+      "app/_config/mysite.yml",
+      "app/src/Page.php",
+      "app/src/PageController.php"
+    ],
+    "public-files-installed": [
+      ".htaccess",
+      "index.php",
+      "web.config"
+    ]
+  },
+  "config": {
+    "process-timeout": 600,
+    "allow-plugins": {
+      "composer/installers": true,
+      "silverstripe/recipe-plugin": true,
+      "silverstripe/vendor-plugin": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "scripts": {
+    "lint": "vendor/bin/phpcs",
+    "fix": "vendor/bin/phpcbf",
+    "rector": "vendor/bin/rector -v",
+    "rector-dry": "vendor/bin/rector -v --dry-run",
+    "phpstan": "vendor/bin/phpstan"
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}

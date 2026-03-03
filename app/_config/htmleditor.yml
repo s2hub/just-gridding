@@ -1,0 +1,7 @@
+---
+Name: custom-htmleditor-config
+After: '#htmleditorconfig'
+---
+SilverStripe\TinyMCE\TinyMCEConfig:
+  default_options:
+    paste_as_text: true

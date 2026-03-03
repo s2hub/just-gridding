@@ -1,0 +1,72 @@
+---
+Name: myfluentconfig
+After:
+  - '#klaro-cookie-consent'
+  - '#fluentconfig'
+---
+
+TractorCow\Fluent\Model\Locale:
+  default_records:
+    de:
+      Title: Deutsch
+      Locale: de_DE
+      URLSegment: de
+      IsGlobalDefault: 1
+    en:
+      Title: English
+      Locale: en_GB
+      URLSegment: en
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+
+
+Dynamic\BaseObject\Model\BaseElementObject:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+    titlefieldfix: Netwerkstatt\Site\Extension\ElementalTitleFluent
+  translate:
+    - Title
+    - Content
+    - ElementLinkID
+Dynamic\Elements\Timeline\Model\TimelineObject:
+  translate: []
+
+DNADesign\Elemental\Models\BaseElement:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+    titlefieldfix: Netwerkstatt\Site\Extension\ElementalTitleFluent
+  translate:
+    - Title
+
+gorriecoe\Link\Models\Link:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+  translate:
+    - Title
+    - Anchor
+    - URL
+
+PurpleSpider\BasicGalleryExtension\PhotoGalleryImage:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+
+EdgarIndustries\ElementalMap\Model\MapMarker:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+
+Kraftausdruck\Models\CookieCategory:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+  translate:
+    - Title
+    - Content
+Kraftausdruck\Models\CookieEntry:
+  extensions:
+    fluent: TractorCow\Fluent\Extension\FluentExtension
+  translate:
+    - Title
+    - Purpose
+    - Policy
+    - Time
