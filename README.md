@@ -11,9 +11,13 @@ I suppose to have seperate classes / pages / modeladmins per feature shown. All 
 
 Each feature should have a fixtures and demo data that's populated automatically on dev/build. Use "default_elements" for that.
 
+## Talks and resources
+- [Martina]()'s and [Werner]()'s talk at Stripecon 2025 in Manchester: A Dive into Gridfield. Read the slides [slides](https://speakerdeck.com/wernerkrauss/a-dive-into-gridfield).
+
+
 ## TODO
 ### General
-  - [ ] ddev standard configuration
+  - [X] ddev standard configuration
   - [ ] decide on a method to handle features and default data
   - [ ] do the stuff
   - [ ] have fun! 🥳
