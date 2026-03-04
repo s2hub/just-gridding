@@ -1,7 +1,5 @@
-includes:
-	- phpstan-baseline.neon
-
 parameters:
     level: 4
     paths:
         - app/src
+        - just-gridding/src
