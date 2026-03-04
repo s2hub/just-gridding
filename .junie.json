@@ -1,5 +1,8 @@
 {
   "version": "1.0",
+  "guidelines": [
+    "All code, documentation, and explanations must be in English."
+  ],
   "commands": {
     "test": {
       "command": "ddev phpunit",
@@ -44,6 +47,11 @@
     "vite": {
       "command": "ddev vite",
       "description": "Runs Vite commands (dev, build, preview)",
+      "trusted": true
+    },
+    "sync-docs": {
+      "command": "ddev sync-docs",
+      "description": "Synchronizes PHP code snippets to Markdown documentation",
       "trusted": true
     }
   }

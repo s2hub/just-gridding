@@ -33,6 +33,7 @@ STATUS_PRETTIER="SKIP"
 STATUS_RECTOR="SKIP"
 STATUS_PHPSTAN="SKIP"
 STATUS_JACK="SKIP"
+STATUS_DOCS="SKIP"
 
 # 1) PHPUnit
 echo "*** PHPUnit ***"
@@ -103,6 +104,19 @@ else
   STATUS_JACK="FAILED"
   EXIT_CODE=1
 fi
+
+# 7) Doc Sync Check
+echo "*** Doc Sync Check ***"
+# If any file is updated, it means it wasn't in sync.
+if php just-gridding/bin/sync-docs.php | grep "Updated:"; then
+  echo -e "${RED}[ERROR] Documentation was not synchronized. Please run 'ddev sync-docs' and commit the changes.${NC}"
+  STATUS_DOCS="FAILED"
+  EXIT_CODE=1
+else
+  echo -e "${GREEN}[OK] Documentation is synchronized${NC}"
+  STATUS_DOCS="OK"
+fi
+
 # --- SUMMARY ---
 echo -e "\n================ SUMMARY ================"
 
@@ -124,6 +138,7 @@ print_status "Prettier" "$STATUS_PRETTIER"
 print_status "Rector" "$STATUS_RECTOR"
 print_status "PHPStan" "$STATUS_PHPSTAN"
 print_status "Jack" "$STATUS_JACK"
+print_status "Doc Sync" "$STATUS_DOCS"
 
 echo "========================================="
 

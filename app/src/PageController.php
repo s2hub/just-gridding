@@ -2,8 +2,6 @@
 
 namespace {
 
-    use Override;
-    use Page;
     use SilverStripe\CMS\Controllers\ContentController;
     use SilverStripe\CMS\Model\SiteTree;
     use SilverStripe\i18n\i18n;

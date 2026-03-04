@@ -28,7 +28,8 @@
     "atwx/silverstripe-vitehelper": "^1",
     "wilr/silverstripe-googlesitemaps": "^4",
     "pixelpoems/silverstripe-vanilla-cookieconsent": "^2",
-    "wernerkrauss/silverstripe-menumanager": "dev-main"
+    "wernerkrauss/silverstripe-menumanager": "dev-main",
+    "erusev/parsedown": "^1.8"
   },
   "require-dev": {
     "phpunit/phpunit": "^12.0|^13",
@@ -50,6 +51,7 @@
       "themes/mytheme/dist"
     ],
     "project-files-installed": [
+      ".htaccess",
       "app/.htaccess",
       "app/_config.php",
       "app/_config/mimevalidator.yml",
@@ -62,6 +64,11 @@
       "index.php",
       "web.config"
     ]
+  },
+  "autoload": {
+    "psr-4": {
+      "S2Hub\\JustGridding\\": "just-gridding/src/"
+    }
   },
   "config": {
     "process-timeout": 600,

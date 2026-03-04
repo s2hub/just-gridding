@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Synchronize PHP snippets to README files
+## Usage: sync-docs
+## Example: "ddev sync-docs"
+
+php just-gridding/bin/sync-docs.php

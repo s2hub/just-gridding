@@ -1,0 +1,354 @@
+A Dive Into Gridfield
+Martina Lindenhofer, BSc.Werner M. Krauß
+StripeCon 2025, Manchester (UK)
+
+Martina Lindenhofer, BSc.
+Born in Lower Austria, Lives in Vienna since 2010
+Married, Expecting 
+Bachelor’s degree in Media Informatics at the University of Vienna
+WebDeveloper at pixelpoems since 2020, works with SilverStripe since 2016
+Martina on Slack, MLindenhofer on github
+AI Art, Japan, Anime, Manga, Gaming, Cosplay, HEMA
+
+Werner M. Krauß
+wmkBad Ischl, Austrianetwerkstatt.at2 kids, at least 5 guitars, pilgrim
+
+The GridField - Let’s Start Diving
+Generated with Microsoft Bing AI Image Creator
+What's it good for
+Managing has_many and many_many relations in the CMS (backend); has_one Field as special grid for managing a has_one relation
+Very powerful and flexible
+Possible alternative for Frontend: Andy's module from Ljubljana; Frontend Grid still a thing?
+
+
+History
+
+History
+Bugs exist longer than GridFields
+GridField is part of the framework since SilverStripe 3
+Successor of UncleCheese’s DataObjectManager in 2.4
+And TableListField / ComplexTableField even before…-
+Werner
+
+How Does It Work
+
+
+Overal Structure
+GridField
+List of Records
+GridFieldComponent
+GridFieldConfig
+
+GridFieldConfig
+A wrapper holding an ArrayList of GridFieldComponent classes
+Many preconfigured configs available:
+GridFieldConfig_RecordViewerReadonly viewer
+GridFieldConfig_RecordEditorAllow editing of Records
+GridFieldConfig_RelationEditorAlso allow adding or removing relations in has_many or many_many relationships
+You can modify those or write your own subclass
+addComponent() / removeComponent()
+
+
+GridFieldComponent
+An Interface, sub-interfaces
+Provides
+GridField_ActionProvider, .._ColumnProvider, .._HTMLProvider, …_StateProvider
+Handles
+…_URLHandler, …_SaveHandler
+Misc
+…_DataManipulator, .._ActionMenuItem
+Collected in GridFieldConfig
+Highly configurable and extendable
+Many extensions available via Composer
+Werner
+
+
+GridField_HTMLProvider
+Provides HTML as array of different areas for outputting HTML
+header
+footer
+before
+after
+Your components can define custom areas if needed
+
+Configuration
+Generated with Microsoft Bing AI Image Creator
+Configuration
+preconfigured configs
+configure components
+add/remove components
+
+
+Predefined Configurations
+Subclasses of GridFieldConfig
+GridFieldConfig_Base
+Simple readonly, paginated view of records, with sortable and searchable headers.
+GridFieldConfig_RecordViewer
+Allows viewing readonly details of individual records
+GridFieldConfig_RecordEditor
+Allows editing of records contained within the GridField
+GridFieldConfig_RelationEditor
+Adds features to work on has-many or many-many relationships.
+Werner
+
+Adjust your configs globally
+GridFieldConfig has the updateConfig hook
+Use it in an Extension
+Example:add sorting to all GridFields, where the items have a “Sort” or “SortOrder” field
+
+Werner
+
+GridField And ModelAdmin
+No, they don’t mean me! >.<
+Wikipedia (by Toglenn, 2019)
+A word about ModelAdmin
+modern methods for configuring grid
+example per model class
+
+
+“The HQ Of Data Management”  - ModelAdmin
+Data is managed with GridFields
+GridField configurable for each $managed_modelclass
+Tools for importing (ModelAdmin) and exporting (e.g. to CSV or customised Excel)
+Method to get GridFieldConfig for each model
+Werner
+
+Custom config 
+Modelspecific GridField configuration
+
+Everything configured? Let’s go!
+
+Out Of The Box Features
+Generated with Microsoft Bing AI Image Creator
+Displaying objects: out of the box features
+pagination
+columns / summary fields
+searching
+more advanced search example; A word about SearchContext
+Gridfield State? does it preserve the last page and search filter I was on?
+previewing rendered objects in the backend. Only possible in ModelAdmin or in any grid?
+
+
+Pagination
+For GridFields with many data records
+Items per page configurable
+Martina:  GridField pagination in SilverStripe is the mechanism that splits large record lists into smaller, page-sized chunks, so editors don’t have to load or scroll through hundreds of rows at once. By default, a GridField shows records in pages (e.g. 10, 25, 50 per page) and allows users to navigate between them with pagination controls at the bottom.
+
+Summary Fields
+Can be configured via private static $summary_fields for the shown class 
+Martina
+
+Searchable Fields
+Based on Search Context
+Only database-fields can set as searchable_fields
+Configurable via private static $searchable_fields in your class
+Martina
+
+Useful Extensions
+Martina Useful extensions
+Lumberjack
+manages subpages inside a Page; unclutters sitetree
+gridfieldExtensions module
+sortable
+inline editable
+nested grid
+add multi button
+for fluent
+FluentGridExtension
+Delete All locales Action
+VisibleLocalesColumn
+
+
+Lumberjack
+Organizes pages into a ModelAdmin-Like GridField 
+https://github.com/silverstripe/silverstripe-lumberjack
+Similar to Catalogue Manager 
+
+Martina
+
+Gridfield Extensions
+De-facto standard collection of useful tools
+https://packagist.org/packages/symbiote/silverstripe-gridfieldextensions
+Add existing search button
+Add new multiple class button
+Add GridFielEditab
+MartinaGridFieldAddExistingSearchButton - a more advanced search form for adding items.
+GridFieldAddNewInlineButton - builds on GridFieldEditableColumns to allow inline creation of records.
+GridFieldAddNewMultiClass - lets the user select from a list of classes to create a new record from.
+GridFieldEditableColumns - allows inline editing of records.
+GridFieldOrderableRows - drag and drop re-ordering of rows.
+GridFieldRequestHandler - a basic utility class which can be used to build custom grid field detail views including tabs, breadcrumbs and other CMS features.
+GridFieldTitleHeader - a simple header which displays column titles.
+GridFieldConfigurablePaginator - a paginator for GridField that allows customisable page sizes.
+GridFieldNestedForm - allows nesting of GridFields for managing relation records directly within a parent GridField.
+
+
+Inline Editing
+You can add inline-editable fields to edit records directly in the GridField without having to click into the record itself
+Martina
+
+
+Nested GridFields
+
+Allows nesting of GridFields for managing relation records directly within a parent GridField.
+Screenshot Nested Gridfield; simple example with Class -> item category -> items (z.B. von Camping für Features) (Werner)
+
+
+Add Multi Button
+You can add different Subclasses of a superclass. Example:Superclass → NewsSubclasses → Events, Podcasts, Seminar
+Use ->setClasses() if you don’t want all subclasses in that list
+Checks ->canCreate() on all subclasses else
+
+
+Reorder Items
+Orderable rows - enables Drag & Drop sorting in GridFields
+Martina?
+
+Bulk Editing
+Werner
+
+Bulk Upload
+Throw e.g. Images to an Upload Area
+Adds them to DataObjects which get linked to the current object
+See also: https://docs.silverstripe.org/en/6/optional_features/gridfield-bulk-editing-tools/bulk-uploader/ 
+Werner
+
+
+Bulk Manager	
+Perform actions on multiple records straight from the GridField. 
+Out of the box: unlink, delete and bulk editing. 
+You can also easily create and add your own actions.
+See also: https://docs.silverstripe.org/en/6/optional_features/gridfield-bulk-editing-tools/bulk-manager/ 
+Werner
+
+Fluent Extensions for Grids
+Generated with Microsoft Bing AI Image Creator
+Martina
+
+Fluent Grid Extension
+Automatically added once Fluent is installed 
+Supports GridFieldDetailForm_ItemRequest with extra actions
+It extends GridFieldDataColumns.
+This allows it to take locale-specific values into account when rendering columns in a GridField.
+Displaying the translated value (e.g. title, name) in the GridField instead of the raw/default value.
+Optionally indicating whether a field in the current locale is localised or inherited.
+Ensuring consistent behaviour when switching locales in the CMS (via the locale dropdown in the top-right corner).
+
+Martina
+
+Visible Locales Column
+In which locales an item is localized or not
+works also for setups with fallback-locales
+Martina
+
+Visible Locales Columns - Code Example
+
+
+Martina
+
+Delete All Locales Action
+To delete an Item in ALL locales
+Martina
+
+Delete All Locales Action - Code Example
+Martina
+
+
+Layout modifications
+Werner
+
+Tiled Gridfield
+https://packagist.org/packages/axllent/silverstripe-tiled-gridfield
+
+
+Calendar View
+A component for viewing a GridField's data as a calendar, useful for things like event calendars. It also provides a toggle button that let's you switch between the default list view for a GridField and the Calendar view.
+https://packagist.org/packages/webbuilders-group/silverstripe-gridfield-calendar-view
+
+Werner
+
+What extensions do others use? (Poll results)
+We got a lots of examples of useful GridField-Extensions for in use - some examples:
+https://github.com/bratiask/silverstripe-pickerfield
+https://github.com/silverstripe/silverstripe-gridfield-bulk-editing-tools
+https://github.com/UndefinedOffset/SortableGridField
+https://github.com/webbuilders-group/silverstripe-frontendgridfield
+https://github.com/goldfinch/image-editor
+https://github.com/sunnysideup/silverstripe-yes-no-any-filter
+Thanks for all participants!
+Martina “Umfrage” von Slack 
+
+Get Your Own Component
+Werner
+Write your own component
+example: a red/green button, if an object is published or not. Did that before...
+style row per css with callback from each object (e.g. different background)
+
+
+Style Rows With Custom CSS
+Based on the current record
+GridField calls “updateNewRowClasses” hook
+Write an Extension to GridField and update it
+Werner
+
+Check if the current record fits your needs
+If yes, add a css class to the current row for styling
+
+Is Published Status
+Lumberjack has a GridFieldSiteTreeState config available
+Extends GridField_ColumnProvider
+augmentColumns: modifies column list (e.g. adds a column)
+getColumnsHandled: names of all affected columns
+getColumnContent: actual HTML based on the current record
+getColumnAttributes: HTML attributes, e.g. CSS classes; based on current record
+getColumnMetaData: can be used by other components
+=> adding your own tool to a GridField isn’t that complicated
+Werner
+
+Werner
+
+Aaand Action: GridFieldItemRequest
+Modify Item Request for own actions
+lekoala module for cms actions / modal
+
+
+Own functionality when editing a DataObject
+GridFieldItem_Request is the Controller for editing a DataObject
+Can be the controller if you have custom actions, e.g. buttons etc. for the current item
+E.g. send an invoice for the current Order
+
+
+Quiztime!
+Als Lernzielkontrolle … ;)
+
+Kahoot?
+
+Wie heißt ein Vorgänger des GridFields? - DataObjectManager oder TableListField
+
+Was kann ich nicht im Gridfield anzeigen? ArrayList, DataObjects, Relations, XX Extensions
+
+Das Configsystem ist: Objektorientiert, functional, Imperative, Procedural
+
+Welche GridFieldComponent gibt es nicht: ColumnProvider, RowProvider (XX), Header, …
+
+Should I unit test my GridField config? - yes, yes, yes, of course
+
+
+What is the big advantage of the "DeleteAllLocalesAction"-Component?
+
+*) It deletes a record in the locale you are currently in
+*) It deletes a record in all locales at once (X)
+*) It deletes your whole project 
+Inline-Editing for GridFields is inbuilt already*) true *) false (X)*) don’t know
+
+RTFM
+Docs: https://docs.silverstripe.org/en/6/developer_guides/forms/field_types/gridfield/
+Create your own componenthttps://docs.silverstripe.org/en/6/developer_guides/forms/how_tos/create_a_gridfieldcomponent/	
+
+Explore
+To be done: a repo for easily exploring of various GridField settingshttps://github.com/s2hub/just-gridding 
+
+Questions?
+Johannes?
+
+Thank you very much!
