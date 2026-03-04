@@ -34,8 +34,13 @@ class SimpleRecord extends DataObject
     private static $summary_fields = [
         'Title' => 'Title',
         'Category.Title' => 'Category',
-        'Status' => 'Status',
+        'Status' => 'Status'
     ];
+
+    public function getSummaryStatus(): string
+    {
+        return sprintf('%s [%s]', $this->Title, $this->Status);
+    }
 
     #[Override]
     public function getCMSFields()
