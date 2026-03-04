@@ -1,32 +1,50 @@
 # GridField "Kitchen Sink" TODOs
 
-Hier sind die geplanten GridField-Beispiele, basierend auf dem Vortrag "A Dive Into Gridfield".
+Here are the planned GridField examples, based on the talk "A Dive Into Gridfield".
 
 ## Organisation
-- Jedes Beispiel befindet sich in seinem eigenen Namespace unter `Netwerkstatt\JustGridding\Examples\{FeatureName}`.
-- Die Dokumentation liegt als `README.md` direkt im Verzeichnis des Beispiels und wird im CMS über ein `LiteralField` (Markdown-geparst) angezeigt.
+- Each example is located in its own namespace under `S2Hub\JustGridding\Examples\{Topic}\{FeatureName}`.
+- Documentation is stored as `README.md` directly in the example directory and displayed in the CMS via a `LiteralField` (Markdown-parsed).
+- **Metadata**: Each `README.md` contains YAML frontmatter (difficulty, status, tags), which is used for display in the CMS.
 
-## Beispiele & Status
+## Examples & Status (Thematically Organized)
 
-| Feature | Schwierigkeit | Status | Beschreibung |
+### **Basics**
+| Feature | Difficulty | Status | Description |
 | :--- | :--- | :--- | :--- |
-| **GridFieldConfig_Base** | Beginner | ✅ | Einfache Read-only Ansicht. |
-| **GridFieldConfig_RecordEditor** | Beginner | ✅ | Standard Bearbeitung von Datensätzen. |
-| **Custom Summary Fields** | Beginner | ✅ | Konfiguration von `$summary_fields` inkl. Relationen. |
-| **GridField_HTMLProvider** | Standard | ⏳ | Eigenes HTML (Header/Footer) hinzufügen. |
-| **Lumberjack** | Standard | ⏳ | Seitenverwaltung via GridField (unclutter sitetree). |
-| **GridFieldExtensions: OrderableRows** | Standard | ⏳ | Drag & Drop Sortierung. |
-| **GridFieldExtensions: MultiClass** | Standard | ⏳ | Verschiedene Subklassen in einem Grid anlegen. |
-| **Inline Editing** | Standard | ⏳ | Bearbeiten von Feldern direkt in der Liste. |
-| **Bulk Editing (BulkManager)** | Standard | ⏳ | Aktionen auf mehrere Datensätze gleichzeitig. |
-| **Nested GridFields** | Advanced | ⏳ | GridField innerhalb eines GridFields. |
-| **Fluent Integration** | Advanced | ⏳ | Lokalisierung im GridField (Visible Locales Column). |
-| **Custom GridField Component** | Pro | ⏳ | Eine komplett eigene Komponente (z.B. Status-Ampel). |
-| **GridFieldItemRequest Extension** | Pro | ⏳ | Eigene Buttons/Aktionen im Edit-Formular. |
-| **Style Rows with CSS** | Advanced | ⏳ | Zeilen basierend auf Daten einfärben. |
-| **Tiled / Calendar Layout** | Advanced | ⏳ | Alternative Layouts für das GridField. |
+| **GridFieldConfig_Base** | Beginner | ✅ | Simple read-only view. |
+| **GridFieldConfig_RecordEditor** | Beginner | ✅ | Standard record editing. |
+| **Custom Summary Fields** | Beginner | ✅ | Configuration of `$summary_fields` including relations. |
 
-## Legende
-- ⏳: Ausstehend
-- 🔨: In Arbeit
-- ✅: Fertiggestellt
+### **UI & Styling**
+| Feature | Difficulty | Status | Description |
+| :--- | :--- | :--- | :--- |
+| **GridField_HTMLProvider** | Standard | ⏳ | Add custom HTML (Header/Footer). |
+| **Style Rows with CSS** | Advanced | ⏳ | Colorize rows based on data. |
+| **Tiled / Calendar Layout** | Advanced | ⏳ | Alternative layouts for the GridField. |
+
+### **Extensions & Workflow**
+| Feature | Difficulty | Status | Description |
+| :--- | :--- | :--- | :--- |
+| **GridFieldExtensions: OrderableRows** | Standard | ⏳ | Drag & Drop sorting. |
+| **GridFieldExtensions: MultiClass** | Standard | ⏳ | Create different subclasses in one grid. |
+| **Inline Editing** | Standard | ⏳ | Edit fields directly in the list. |
+| **Bulk Editing (BulkManager)** | Standard | ⏳ | Actions on multiple records simultaneously. |
+| **Lumberjack** | Standard | ⏳ | Page management via GridField (unclutter sitetree). |
+
+### **Advanced Customization**
+| Feature | Difficulty | Status | Description |
+| :--- | :--- | :--- | :--- |
+| **Custom GridField Component** | Pro | ⏳ | A completely custom component (e.g., status indicator). |
+| **GridFieldItemRequest Extension** | Pro | ⏳ | Custom buttons/actions in the edit form. |
+| **Nested GridFields** | Advanced | ⏳ | GridField within a GridField. |
+
+### **Integrations**
+| Feature | Difficulty | Status | Description |
+| :--- | :--- | :--- | :--- |
+| **Fluent Integration** | Advanced | ⏳ | Localization in GridField (Visible Locales Column). |
+
+## Legend
+- ⏳: Pending
+- 🔨: In Progress
+- ✅: Completed

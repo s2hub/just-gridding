@@ -34,7 +34,7 @@ class SourceCodeExtractor
 
             if (preg_match('/\/\/ \[SNIPPET_END\]/', $line)) {
                 if ($currentSnippetName !== null) {
-                    $snippets[$currentSnippetName] = self::cleanSnippet(implode("\n", $currentSnippetLines));
+                    $snippets[$currentSnippetName] = SourceCodeExtractor::cleanSnippet(implode("\n", $currentSnippetLines));
                     $currentSnippetName = null;
                 }
                 continue;
@@ -53,10 +53,10 @@ class SourceCodeExtractor
      */
     protected static function cleanSnippet(string $content): string
     {
-        $lines = explode("\n", $content);
-        if ($lines === []) {
-            return $content;
+        if ($content === '') {
+            return '';
         }
+        $lines = explode("\n", $content);
 
         // Find minimum indentation
         $minIndent = PHP_INT_MAX;

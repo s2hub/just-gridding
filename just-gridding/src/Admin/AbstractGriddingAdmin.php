@@ -2,8 +2,8 @@
 
 namespace S2Hub\JustGridding\Admin;
 
-use Parsedown;
 use ReflectionClass;
+use S2Hub\JustGridding\Utils\MarkdownRenderer;
 use S2Hub\JustGridding\Utils\SourceCodeExtractor;
 use SilverStripe\Admin\ModelAdmin;
 use SilverStripe\Forms\GridField\GridField;
@@ -94,11 +94,11 @@ CSS
     {
         $readmePath = $this->getGroupReadmePath();
         if ($readmePath && file_exists($readmePath)) {
-            $markdown = file_get_contents($readmePath);
-            $parsedown = new Parsedown();
-            $html = $parsedown->text($markdown);
-            
-            return sprintf('<div class="gridfield-example-header message notice">%s</div>', $html);
+            $markdownRaw = file_get_contents($readmePath);
+            return sprintf(
+                '<div class="gridfield-example-header">%s</div>',
+                MarkdownRenderer::render($markdownRaw)
+            );
         }
 
         return '';
@@ -114,14 +114,10 @@ CSS
     {
         $readmePath = $this->getTabReadmePath($modelTab);
         if ($readmePath && file_exists($readmePath)) {
-            $markdown = file_get_contents($readmePath);
-            $parsedown = new Parsedown();
-            $html = $parsedown->text($markdown);
+            $markdownRaw = file_get_contents($readmePath);
+            $html = MarkdownRenderer::render($markdownRaw);
 
-            return LiteralField::create('TabDocs', sprintf(
-                '<div class="gridfield-example-docs">%s</div>',
-                $html
-            ));
+            return LiteralField::create('TabDocs', $html);
         }
         return null;
     }

@@ -1,3 +1,11 @@
+---
+difficulty: Beginner
+status: Completed
+tags:
+  - CRUD
+  - Standard
+---
+
 # Basics (Editor)
 
 The default configuration for managing records. It allows creating, editing, and deleting objects.

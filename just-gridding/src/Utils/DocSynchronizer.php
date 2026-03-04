@@ -18,8 +18,8 @@ class DocSynchronizer
      */
     public static function syncAll(string $srcDir): void
     {
-        $snippets = self::collectSnippets($srcDir);
-        self::updateReadmes($srcDir, $snippets);
+        $snippets = DocSynchronizer::collectSnippets($srcDir);
+        DocSynchronizer::updateReadmes($srcDir, $snippets);
     }
 
     /**

@@ -1,6 +1,14 @@
+---
+difficulty: Beginner
+status: Completed
+tags:
+  - Base Configuration
+  - Read-only
+---
+
 # Basics (Base)
 
-The simplest configuration. It provides a read-only view of records with pagination and sorting.
+The simplest configuration. It provides a read-only view of records with search, pagination and sorting.
 
 It's useful for displaying lists of data where editing is not required or handled elsewhere.
 
