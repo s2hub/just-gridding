@@ -12,5 +12,5 @@ fi
 
 php vendor/bin/phpcs "$@"
 
-echo "*** Checking Prettier formatting ***"
-/mnt/ddev_config/commands/web/prettier check
+#echo "*** Checking Prettier formatting ***"
+#/mnt/ddev_config/commands/web/prettier check

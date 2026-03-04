@@ -12,5 +12,5 @@ fi
 
 php vendor/bin/phpcbf
 
-echo "*** Running Prettier (Frontend Fixes) ***"
-/mnt/ddev_config/commands/web/prettier write
+#echo "*** Running Prettier (Frontend Fixes) ***"
+#/mnt/ddev_config/commands/web/prettier write

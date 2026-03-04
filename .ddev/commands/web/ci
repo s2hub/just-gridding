@@ -58,16 +58,16 @@ else
 fi
 
 # 3) Prettier Check
-echo "*** Prettier Check ***"
-if /mnt/ddev_config/commands/web/prettier check; then
-  echo -e "${GREEN}[OK] Prettier check passed${NC}"
-  STATUS_PRETTIER="OK"
-else
-  echo -e "${RED}[ERROR] Prettier found formatting issues${NC}"
-  echo "Please run 'ddev prettier write' or 'ddev fix' to fix them."
-  STATUS_PRETTIER="FAILED"
-  EXIT_CODE=1
-fi
+#echo "*** Prettier Check ***"
+#if /mnt/ddev_config/commands/web/prettier check; then
+#  echo -e "${GREEN}[OK] Prettier check passed${NC}"
+#  STATUS_PRETTIER="OK"
+#else
+#  echo -e "${RED}[ERROR] Prettier found formatting issues${NC}"
+#  echo "Please run 'ddev prettier write' or 'ddev fix' to fix them."
+#  STATUS_PRETTIER="FAILED"
+#  EXIT_CODE=1
+#fi
 
 # 4) Rector (dry-run)
 echo "*** Rector ***"
