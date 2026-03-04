@@ -28,7 +28,24 @@ abstract class AbstractGriddingAdmin extends ModelAdmin
         // Load Prism.js for syntax highlighting in the CMS
         Requirements::css('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css');
         Requirements::javascript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js');
+        Requirements::javascript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js');
         Requirements::javascript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js');
+
+        // Add Entwine trigger for Prism (re-highlights after PJAX loads)
+        Requirements::customScript(<<<JS
+            (function($) {
+                $.entwine('ss', function($) {
+                    $('.gridfield-example-docs pre code, .gridfield-example-header pre code').entwine({
+                        onmatch: function() {
+                            if (typeof Prism !== 'undefined') {
+                                Prism.highlightElement(this[0]);
+                            }
+                        }
+                    });
+                });
+            })(jQuery);
+JS
+        );
         
         // Custom styling for the docs
         Requirements::customCSS(<<<CSS
@@ -64,11 +81,6 @@ CSS
             // Add Tab-specific Documentation
             if ($docField = $this->getTabDocumentation((string)$modelTab)) {
                 $form->Fields()->unshift($docField);
-            }
-
-            // Add Snippet from Source
-            if ($snippetField = $this->getSnippetField((string)$modelTab)) {
-                $form->Fields()->unshift($snippetField);
             }
         }
 

@@ -17,6 +17,10 @@ class BasicsAdmin extends AbstractGriddingAdmin
             'title' => 'Basics (Base)',
             'dataClass' => SimpleRecord::class,
         ],
+        'Basics_Summary' => [
+            'title' => 'Basics (Summary)',
+            'dataClass' => SimpleRecord::class,
+        ],
         'Basics_Editor' => [
             'title' => 'Basics (Editor)',
             'dataClass' => SimpleRecord::class,
@@ -33,6 +37,18 @@ class BasicsAdmin extends AbstractGriddingAdmin
             case 'Basics_Base':
                 // [SNIPPET_START: Basics_Base]
                 $gridField->setConfig(GridFieldConfig_Base::create());
+                // [SNIPPET_END]
+                break;
+            case 'Basics_Summary':
+                // [SNIPPET_START: Basics_Summary]
+                $gridField->setConfig(GridFieldConfig_Base::create());
+                $gridField->getConfig()
+                    ->getComponentByType(\SilverStripe\Forms\GridField\GridFieldDataColumns::class)
+                    ->setDisplayFields([
+                        'Title' => 'Main Title',
+                        'Category.Title' => 'Associated Category',
+                        'getSummaryStatus' => 'Formatted Status',
+                    ]);
                 // [SNIPPET_END]
                 break;
             case 'Basics_Editor':
@@ -52,6 +68,7 @@ class BasicsAdmin extends AbstractGriddingAdmin
     {
         $map = [
             'Basics_Base' => 'Base',
+            'Basics_Summary' => 'Summary',
             'Basics_Editor' => 'Editor',
         ];
 
